@@ -1,0 +1,21 @@
+from datetime import datetime
+try:
+
+    diaatual = datetime.now().day
+    mesatual = datetime.now().month
+    anoatual = datetime.now().year
+
+    nome = input("Digite o seu nome:")
+    dtnasc = input("Digite a sua data de nascimento(dd/mm/aaaa):")
+
+    dianasc, mesnasc, anonasc = dtnasc.split("/")
+    dianasc, mesnasc, anonasc = int(dianasc), int(mesnasc), int(anonasc)
+
+    idade = anoatual - anonasc
+
+    if(idade<=17):
+        print(f"{nome} nasceu em {dtnasc} e tem {idade} anos.Portanto é menor de idade.")
+    else:
+        print(f"{nome} nasceu em {dtnasc} e tem {idade} anos. Portanto é maior de idade.")
+except:
+    print("Digite apenas números")
