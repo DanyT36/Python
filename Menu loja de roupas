@@ -1,0 +1,100 @@
+lista_prod = ["Blusas", "Vestidos", "Calças", "Saias", "Bermudas", ]
+lista_tamanhos = ["PP", "P", "M", "G", "GG"]
+
+def incluir():
+    produto = input("Digite o produto desejado:")
+    tamanho = input("Digite o tamanho desejado:").upper()
+    while tamanho not in ["PP", "P", "M", "G", "GG"]:
+        print("Tamanho inválido")
+        tamanho = input("Digite o tamanho desejado:").upper()
+    lista_prod.append(produto)
+    lista_tamanhos.append(tamanho)
+    print("Produto cadastrado")
+
+
+def exibirumProduto():
+    try:
+        produto = int(input("Digite o código do produto desejado:"))
+        print(f"{produto}) produto: {lista_prod[produto-1]}| tamanho: {lista_tamanhos[produto-1]}")
+    except(ValueError):
+        print("Digite somente números inteiros")
+    except(IndexError):
+        print(f"Índice alto, tamanho atual da lista {len(lista_prod)}")
+
+def exibirProduto():
+    for i in range(len(lista_prod)):
+        print(f"{i+1}) produto: {lista_prod[i]}| tamanho: {lista_tamanhos[i]}")
+
+def excluir():
+    try:
+        exibirProduto()
+        codigo_prod = int(input("Digite o código do produto:"))
+        lista_prod.pop(codigo_prod-1)
+        lista_tamanhos.pop(codigo_prod-1)
+        print("Produto excluído")
+    except(ValueError):
+        print("Digite somente números inteiros")
+    except(IndexError):
+        print(f"Índice alto, tamanho atual da lista {len(lista_prod)}")
+
+
+def excluirTodos():
+    lista_prod.clear()
+    lista_tamanhos.clear()
+    print("Lista excluída")
+
+def alterarProduto():
+    exibirProduto()
+    try:
+        codigo_prod = int(input("Digite o código do produto:"))
+        novoprod = input("Digite o novo produto:")
+        novotam = input("Digite o novo tamanho:").upper()
+        while novotam not in ["PP", "P", "M", "G", "GG"]:
+            print("Tamanho inválido")
+            novotam = input("Digite o novo tamanho:").upper()
+        lista_prod[codigo_prod-1] = novoprod
+        lista_tamanhos[codigo_prod-1] = novotam
+        print("Produto alterado")
+    except(ValueError):
+        print("Digite somente números inteiros")
+    except(IndexError):
+        print(f"Índice alto, tamanho atual da lista {len(lista_prod)}")
+
+    
+
+def menu():
+    print("\n=======================================")
+    print("C A D A S T R O   D E   P R O D U T O S")
+    print("=======================================")
+   
+    op = 0
+    while (op!= 5):
+        print("=======================================")
+        print("1) INCLUIR")
+        print("2) EXIBIR TODOS OS PRODUTOS")
+        print("3) EXCLUIR PELO NÚMERO DO PRODUTO")
+        print("4) EXCLUIR TODOS OS PRODUTOS")
+        print("5) ALTERAR PRODUTO")
+        print("6) EXIBIR UM PRODUTO")
+        print("0) SAIR")
+        print("=======================================")
+
+        op =int(input("Digite a opção: "))
+        match op:
+            case 1: #incluir
+                incluir()
+            case 2: #exibir produtos
+                exibirProduto()
+            case 3: # excluir
+                excluir()
+            case 4: # excluir todos os produtos
+                excluirTodos()
+            case 5:
+                alterarProduto()
+            case 6:
+                exibirumProduto()
+            case 0:
+                print("Programa Finalizado!")
+            case _:
+                print("Entrada inválida! Tente novamente.")
+menu()
